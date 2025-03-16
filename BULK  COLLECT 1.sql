@@ -1,0 +1,114 @@
+DECLARE
+    TYPE EMP_TABLE IS TABLE OF EMP_LARGE%ROWTYPE;
+    EMP_DATA EMP_TABLE;
+BEGIN
+    SELECT * BULK COLLECT INTO EMP_DATA FROM EMP_LARGE;
+    
+    FOR I IN EMP_DATA.FIRST .. EMP_DATA.LAST 
+    LOOP
+    DBMS_OUTPUT.PUT_LINE('EMPLOYEE: ' || EMP_DATA(I).EMPNO ||' - '||EMP_DATA(I).ENAME);
+    END LOOP;
+    END;
+    /
+    
+    ----================================================
+    
+    DECLARE
+    TYPE EMPNO_TABLE IS TABLE OF EMP_LARGE.EMPNO%TYPE;
+    TYPE ENAME_TABLE IS TABLE OF EMP_LARGE.ENAME%TYPE;
+    EMP_IDS EMPNO_TABLE;
+    EMP_NAMES ENAME_TABLE;
+BEGIN
+    SELECT EMPNO,ENAME BULK COLLECT INTO EMP_IDS,EMP_NAMES FROM EMP_LARGE;
+    
+    FOR I IN EMP_IDS.FIRST .. EMP_NAMES.LAST 
+    LOOP
+     DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_ids(i) || ' - Name: ' || emp_names(i));
+    END LOOP;
+END;
+/
+
+---Increase Salary by 10% for All Employees
+----=======================================
+
+
+    DECLARE
+        TYPE EMP_TABLE IS TABLE OF EMP_LARGE%ROWTYPE;
+        EMP_DATA EMP_TABLE;
+    BEGIN
+        SELECT * BULK COLLECT INTO EMP_DATA FROM EMP_LARGE;
+        
+        FOR I IN EMP_DATA.FIRST .. EMP_DATA.LAST
+        LOOP
+           EMP_DATA(I).SAL:=EMP_DATA(I).SAL*1.10;
+           END LOOP;
+        
+        FOR I IN EMP_DATA.FIRST .. EMP_DATA.LAST
+        LOOP
+             DBMS_OUTPUT.PUT_LINE('EMPLOYEE: ' || EMP_DATA(I).EMPNO || ' NEW SALARY: ' || EMP_DATA(I).SAL);
+    END LOOP;
+END;
+
+--- Find and Display Employees with Salary > 5000
+---===================================
+DECLARE
+    TYPE EMP_TABLE IS TABLE OF EMP_LARGE%ROWTYPE;
+    EMP_DATA EMP_TABLE;
+BEGIN
+    SELECT * BULK COLLECT INTO EMP_DATA FROM EMP_LARGE WHERE SAL>5000;
+    
+    FOR I IN EMP_DATA.FIRST .. EMP_DATA.LAST
+    LOOP
+    DBMS_OUTPUT.PUT_LINE('EMPLOYEE: ' || EMP_DATA(I).ENAME || ' - SALARY: ' || EMP_DATA(I).SAL);
+    END LOOP;
+END;
+
+
+--- Store Employee Names in a Collection and Display
+---================================
+DECLARE
+    TYPE EMP_TABLE IS TABLE OF VARCHAR2(100);
+    EMP_NAMES EMP_TABLE;
+BEGIN
+    SELECT ENAME BULK COLLECT INTO  EMP_NAMES FROM EMP_LARGE;
+    
+    FOR I IN EMP_NAMES.FIRST ..EMP_NAMES.LAST
+    LOOP
+    DBMS_OUTPUT.PUT_LINE('EMPLOYEE NAME: '||EMP_NAMES(I));
+    END LOOP;
+    END;
+
+---Fetch Employee Details for a Specific Department
+----===================================
+DECLARE
+    TYPE EMP_TABLE IS TABLE OF EMP_LARGE%ROWTYPE;
+    EMP_DATA EMP_TABLE;
+    V_DEPTNO NUMBER:=10;
+BEGIN   
+    SELECT * BULK COLLECT INTO EMP_DATA FROM EMP_LARGE WHERE DEPTNO=V_DEPTNO;
+    
+    FOR I IN EMP_DATA.FIRST .. EMP_DATA.LAST
+    LOOP
+    DBMS_OUTPUT.PUT_LINE('EMP: ' ||EMP_DATA(I).ENAME || '-DEPT: '||EMP_DATA(I).DEPTNO);
+    END LOOP;
+    END;
+    
+  ----Fetch Data in Chunks and Process It
+  ----======================================
+  DECLARE
+    TYPE EMP_TABLE IS TABLE OF EMP_LARGE%ROWTYPE;
+    EMP_DATA EMP_TABLE;
+    CURSOR EMP_CUR IS SELECT * FROM EMP_LARGE;
+  BEGIN
+    OPEN EMP_CUR;
+    LOOP
+        FETCH EMP_CUR BULK COLLECT INTO EMP_DATA LIMIT 200;
+        EXIT WHEN EMP_DATA.COUNT=0;
+        
+        FOR I IN EMP_DATA.FIRST .. EMP_DATA.LAST
+        LOOP
+            DBMS_OUTPUT.PUT_LINE('EMPLOYEE: ' || EMP_DATA(I).ENAME);
+            END LOOP;
+         END LOOP;
+         CLOSE EMP_CUR;
+         END;
