@@ -1,0 +1,12 @@
+ --Count Employees in a Department
+    CREATE OR REPLACE FUNCTION EMP_COUNT(DEPT_ID NUMBER)
+    RETURN NUMBER
+    IS
+        EMP_TOTAL NUMBER;
+    BEGIN
+        SELECT COUNT(*) INTO EMP_TOTAL FROM EMP_LARGE WHERE DEPTNO=DEPT_ID;
+        
+        RETURN EMP_TOTAL;
+        END;
+        
+        SELECT EMP_COUNT(20) FROM DUAL;
