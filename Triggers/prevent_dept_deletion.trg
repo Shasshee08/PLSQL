@@ -14,3 +14,5 @@ END;
 
 --================
 DELETE FROM DEPT_LARGE WHERE DEPTNO=10;
+
+select * from user_triggers;
