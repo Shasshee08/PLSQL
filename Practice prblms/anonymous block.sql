@@ -1,0 +1,140 @@
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('LEARNING PLSQL');
+    DBMS_OUTPUT.PUT_LINE('HELLO SHASSHEE');
+    END;
+    /
+    
+DECLARE
+--    MESSAGE VARCHAR2(30):='HELLO SHASHIKIRAN BYRI';
+    MESSAGE_1 VARCHAR2(30):='LEARN PLSQL';
+    BEGIN
+    DBMS_OUTPUT.PUT_LINE(MESSAGE_1);
+    END;
+    /
+    
+DECLARE
+dob DATE := SYSDATE;
+BEGIN
+DBMS_OUTPUT.put_line( DOB);
+END;
+/
+
+DECLARE
+    X PLS_INTEGER:=123456789;
+    BEGIN
+    DBMS_OUTPUT.put_line(X);
+    END;
+    /
+    
+    DECLARE
+    num NUMBER(10, 2) := 1234.56;
+    int_value PLS_INTEGER := 100;
+    salary BINARY_INTEGER := 2000; -- Deprecated, avoid using
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Number: ' || num);
+    DBMS_OUTPUT.PUT_LINE('PLS_INTEGER: ' || int_value);
+    DBMS_OUTPUT.PUT_LINE('Binary Integer: ' || salary);
+END;
+/
+
+
+DECLARE
+    NAME VARCHAR2(20):= 'CHINTU';
+    FIXED_NAME CHAR(10):= 'JOHN';
+    BEGIN
+        DBMS_OUTPUT.put_line('NAME: '|| NAME);
+        DBMS_OUTPUT.put_line('FIXED_NAME: ' ||FIXED_NAME);
+        END;
+        /
+        
+--    DATE AND TIME DATATYPE
+DECLARE
+    today DATE := SYSDATE;
+    timestamp_value TIMESTAMP := SYSTIMESTAMP;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Today: ' || today);
+    DBMS_OUTPUT.PUT_LINE('Timestamp: ' || timestamp_value);
+END;
+/
+
+--VARIABLES
+DECLARE
+    A INTEGER:=10;
+    B INTEGER:=20;
+    C INTEGER;
+    D REAL;
+BEGIN
+    C:=A+B;
+    DBMS_OUTPUT.PUT_LINE(C);
+    D:=70.0/3.0;
+    DBMS_OUTPUT.PUT_LINE(D);
+END;
+/
+
+
+DECLARE
+--    global variable
+    A INTEGER:=95;
+    B INTEGER:=85;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE(A);
+    DBMS_OUTPUT.PUT_LINE(B);
+    DECLARE
+--    LOCAL VARIABLE
+    C INTEGER:=195;
+    D INTEGER:=185;
+        BEGIN
+            DBMS_OUTPUT.PUT_LINE(C);
+            DBMS_OUTPUT.PUT_LINE(D);
+       END;
+        END;
+    /
+    
+    CREATE TABLE CUSTOMERS( 
+   ID   INT NOT NULL, 
+   NAME VARCHAR (20) NOT NULL, 
+   AGE INT NOT NULL, 
+   ADDRESS CHAR (25), 
+   SALARY   DECIMAL (18, 2),        
+   PRIMARY KEY (ID) 
+);  
+
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (1, 'Ramesh', 32, 'Ahmedabad', 2000.00 );  
+
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (2, 'Khilan', 25, 'Delhi', 1500.00 );  
+
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (3, 'kaushik', 23, 'Kota', 2000.00 );
+  
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (4, 'Chaitali', 25, 'Mumbai', 6500.00 ); 
+ 
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (5, 'Hardik', 27, 'Bhopal', 8500.00 );  
+
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (6, 'Komal', 22, 'MP', 4500.00 ); 
+
+COMMIT;
+
+SELECT * FROM CUSTOMERS;
+
+DECLARE
+    C_ID CUSTOMERS.ID%TYPE :=1;
+    C_NAME CUSTOMERS.name%type;
+    C_ADDR CUSTOMERS.address%type;
+    C_SAL CUSTOMERS.salary%type;
+    BEGIN
+    SELECT NAME,ADDRESS,SALARY INTO C_NAME,C_ADDR,C_SAL 
+    FROM CUSTOMERS
+    WHERE ID=C_ID;
+    DBMS_OUTPUT.PUT_LINE
+    ('CUSTOMER ' || C_NAME ||' FROM ' || C_ADDR ||' EARNS ' || C_SAL );
+    END;
+    /
+    
+
+
+
