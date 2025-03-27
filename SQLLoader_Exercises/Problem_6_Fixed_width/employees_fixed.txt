@@ -1,0 +1,4 @@
+101  John       Doe        50000
+102  Alice      Smith      55000
+103  Bob        Martin     60000
+104  David      Lee        70000
