@@ -1,0 +1,32 @@
+
+SQL*Loader: Release 19.0.0.0.0 - Production on Thu Mar 27 13:07:47 2025
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   load_data_when.ctl
+Data File:      employees_when.csv
+  Bad File:     employees_when.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 50
+Bind array:     250 rows, maximum of 1048576 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table EMP_WHEN, loaded when SALARY = 0X34353030(character '4500')
+Insert option in effect for this table: INSERT
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+EMPNO                               FIRST     *   ,  O(") CHARACTER            
+FIRST_NAME                           NEXT     *   ,  O(") CHARACTER            
+LAST_NAME                            NEXT     *   ,  O(") CHARACTER            
+SALARY                               NEXT    10   ,  O(") CHARACTER            
+
+SQL*Loader-601: For INSERT option, table must be empty.  Error on table EMP_WHEN
