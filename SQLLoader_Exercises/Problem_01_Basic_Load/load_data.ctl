@@ -1,0 +1,5 @@
+LOAD DATA
+INFILE 'data.csv'
+into table employees
+FIELDS TERMINATED BY ','
+(EMPNO,FIRST_NAME,LAST_NAME,SALARY)
