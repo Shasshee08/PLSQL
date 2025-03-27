@@ -1,0 +1,54 @@
+
+SQL*Loader: Release 19.0.0.0.0 - Production on Thu Mar 27 12:48:38 2025
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   load_data_skip_bad.ctl
+Data File:      employees_bad.csv
+  Bad File:     EMP_BAD_RECORDS.BAD
+  Discard File: EMP_DISCARD.LOG 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 50
+Bind array:     250 rows, maximum of 1048576 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table EMP_BAD, loaded from every logical record.
+Insert option in effect for this table: INSERT
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+EMPNO                               FIRST     *   ,  O(") CHARACTER            
+FIRST_NAME                           NEXT     *   ,  O(") CHARACTER            
+LAST_NAME                            NEXT     *   ,  O(") CHARACTER            
+SALARY                               NEXT     *   ,  O(") CHARACTER            
+
+Record 3: Rejected - Error on table EMP_BAD, column EMPNO.
+ORA-01722: invalid number
+
+
+Table EMP_BAD:
+  3 Rows successfully loaded.
+  1 Row not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Space allocated for bind array:                 258000 bytes(250 rows)
+Read   buffer bytes: 1048576
+
+Total logical records skipped:          0
+Total logical records read:             4
+Total logical records rejected:         1
+Total logical records discarded:        0
+
+Run began on Thu Mar 27 12:48:38 2025
+Run ended on Thu Mar 27 12:48:39 2025
+
+Elapsed time was:     00:00:00.58
+CPU time was:         00:00:00.22
