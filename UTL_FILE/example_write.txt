@@ -1,0 +1,24 @@
+DECLARE
+    file_handle UTL_FILE.FILE_TYPE;
+BEGIN
+    -- Open the file in write mode
+    file_handle := UTL_FILE.FOPEN('MY_DIR', 'example_write.txt', 'W');
+
+    -- Write lines to the file
+    UTL_FILE.PUT_LINE(file_handle, 'First line of text.');
+    UTL_FILE.PUT(file_handle, 'Second line without newline.');
+    UTL_FILE.NEW_LINE(file_handle); -- Manually adding a newline
+    UTL_FILE.PUT_LINE(file_handle, 'Third line of text.');
+
+    -- Close the file
+    UTL_FILE.FCLOSE(file_handle);
+EXCEPTION
+    WHEN OTHERS THEN
+        -- Handle exceptions
+        IF UTL_FILE.IS_OPEN(file_handle) THEN
+            UTL_FILE.FCLOSE(file_handle);
+        END IF;
+        RAISE;
+END;
+/
+Appending this line.

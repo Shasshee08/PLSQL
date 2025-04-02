@@ -1,0 +1,17 @@
+DECLARE
+    file_handle UTL_FILE.FILE_TYPE;
+BEGIN
+    -- Open file in write mode
+    file_handle := UTL_FILE.FOPEN('MY_DIR', 'test_file.txt', 'W');
+
+    -- Write multiple lines to the file
+    UTL_FILE.PUT_LINE(file_handle, 'This is the first line.');
+    UTL_FILE.PUT_LINE(file_handle, 'This is the second line.');
+    UTL_FILE.PUT_LINE(file_handle, 'This is the third line.');
+
+    -- Close the file
+    UTL_FILE.FCLOSE(file_handle);
+
+    DBMS_OUTPUT.PUT_LINE('File written successfully.');
+END;
+/
