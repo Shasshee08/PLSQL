@@ -1,0 +1,9 @@
+LOAD DATA
+INFILE 'C:\tpch-dbgen\region.tbl'
+INTO TABLE REGION
+FIELDS TERMINATED BY '|'
+(
+    R_REGIONKEY,
+    R_NAME,
+    R_COMMENT
+)

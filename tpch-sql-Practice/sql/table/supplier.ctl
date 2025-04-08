@@ -1,0 +1,13 @@
+LOAD DATA
+INFILE 'C:\tpch-dbgen\supplier.tbl'
+INTO TABLE SUPPLIER
+FIELDS TERMINATED BY '|'
+(
+    S_SUPPKEY,
+    S_NAME,
+    S_ADDRESS,
+    S_NATIONKEY,
+    S_PHONE,
+    S_ACCTBAL,
+    S_COMMENT
+)
