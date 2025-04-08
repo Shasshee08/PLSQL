@@ -1,0 +1,1 @@
+sqlplus SHASSHEE/7755@localhost:1521/ORCLPDB
